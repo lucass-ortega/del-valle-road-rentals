@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { ArrowRight, CalendarDays, Car, Clock, Facebook, Instagram, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import roca from "@/assets/roca.jpg";
@@ -48,8 +50,9 @@ function Field({ label, icon: Icon, value, w }: { label: string; icon: typeof Ca
 }
 
 function Index() {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="relative min-h-screen bg-background font-sans">
       <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         <Logo />
         <nav className="hidden items-center gap-8 md:flex">
@@ -58,7 +61,20 @@ function Index() {
           ))}
           <a href="#" className="flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground"><CalendarDays className="h-4 w-4" />Reservar ahora</a>
         </nav>
+        <button onClick={() => setOpen(!open)} aria-label="Abrir menú" className="grid h-11 w-11 place-items-center rounded-md bg-primary text-primary-foreground md:hidden">
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </header>
+      {open && (
+        <div className="absolute inset-x-0 top-[66px] z-50 border-t-4 border-accent bg-navy px-6 py-4 shadow-xl md:hidden animate-in slide-in-from-top-2 fade-in">
+          {nav.map((n, i) => (
+            <a key={n} href="#" onClick={() => setOpen(false)} className={`flex items-center justify-between border-b border-primary-foreground/10 py-3.5 font-medium text-primary-foreground ${i === 0 ? "text-accent" : ""}`}>
+              {n}<ArrowRight className="h-4 w-4 text-accent" />
+            </a>
+          ))}
+          <a href="#" className="mt-4 flex items-center justify-center gap-2 rounded-md bg-accent py-3 font-semibold text-accent-foreground"><CalendarDays className="h-4 w-4" />Reservar ahora</a>
+        </div>
+      )}
 
       <section className="relative">
         <img src={hero} alt="Auto en ruta patagónica" width={1920} height={832} className="h-[480px] w-full object-cover" />
