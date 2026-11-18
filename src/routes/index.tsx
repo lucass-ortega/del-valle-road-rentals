@@ -1,7 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { ArrowRight, CalendarDays, Car, Clock, Facebook, Instagram, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, CalendarDays, Car, Clock, MapPin } from "lucide-react";
+
 import hero from "@/assets/renault-rumbo-a-los-andes.png.asset.json";
 import roca from "@/assets/roca.jpg";
 import neuquen from "@/assets/neuquen.jpg";
@@ -15,28 +14,13 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Del Valle Rent a Car" },
       { property: "og:description", content: "Alquiler de autos en General Roca, Alto Valle y Patagonia." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://del-valle-road-rentals.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://del-valle-road-rentals.lovable.app/" }],
   }),
   component: Index,
 });
-
-const nav = ["Inicio", "Vehículos", "Cómo reservar", "Destinos", "Contacto"];
-
-function Logo({ light = false }: { light?: boolean }) {
-  return (
-    <div className="flex items-center gap-2">
-      <svg viewBox="0 0 120 40" className="h-10 w-24">
-        <path d="M2 36 Q35 2 60 18 T118 34 Q70 24 2 36Z" className={light ? "fill-primary-foreground" : "fill-primary"} />
-        <path d="M20 38 Q60 22 110 36 Q60 30 20 38Z" className="fill-accent" />
-      </svg>
-      <div className={`leading-none ${light ? "text-primary-foreground" : "text-primary"}`}>
-        <div className="font-display text-2xl font-extrabold italic tracking-tight">DEL VALLE</div>
-        <div className="text-[10px] font-semibold italic tracking-[0.4em]">RENT A CAR</div>
-      </div>
-    </div>
-  );
-}
 
 function Field({ label, icon: Icon, value, w }: { label: string; icon: typeof Car; value: string; w: string }) {
   return (
@@ -50,32 +34,8 @@ function Field({ label, icon: Icon, value, w }: { label: string; icon: typeof Ca
 }
 
 function Index() {
-  const [open, setOpen] = useState(false);
   return (
-    <div className="relative min-h-screen bg-background font-sans">
-      <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-        <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
-          {nav.map((n, i) => (
-            <a key={n} href="#" className={`pb-1 text-sm font-medium ${i === 0 ? "border-b-2 border-accent text-primary" : ""}`}>{n}</a>
-          ))}
-          <a href="#" className="flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground"><CalendarDays className="h-4 w-4" />Reservar ahora</a>
-        </nav>
-        <button onClick={() => setOpen(!open)} aria-label="Abrir menú" className="grid h-11 w-11 place-items-center rounded-md bg-primary text-primary-foreground md:hidden">
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </header>
-      {open && (
-        <div className="absolute inset-x-0 top-[66px] z-50 border-t-4 border-accent bg-navy px-6 py-4 shadow-xl md:hidden animate-in slide-in-from-top-2 fade-in">
-          {nav.map((n, i) => (
-            <a key={n} href="#" onClick={() => setOpen(false)} className={`flex items-center justify-between border-b border-primary-foreground/10 py-3.5 font-medium text-primary-foreground ${i === 0 ? "text-accent" : ""}`}>
-              {n}<ArrowRight className="h-4 w-4 text-accent" />
-            </a>
-          ))}
-          <a href="#" className="mt-4 flex items-center justify-center gap-2 rounded-md bg-accent py-3 font-semibold text-accent-foreground"><CalendarDays className="h-4 w-4" />Reservar ahora</a>
-        </div>
-      )}
-
+    <>
       <section className="relative">
         <img src={hero.url} alt="Renault azul rumbo a los Andes" width={1774} height={887} className="h-[480px] w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/40 to-transparent" />
@@ -96,7 +56,7 @@ function Index() {
             <Field label="Hora" icon={Clock} value="10:00" w="flex-1 min-w-28" />
             <Field label="Fecha de devolución" icon={CalendarDays} value="Seleccionar fecha" w="flex-[1.4] min-w-40" />
             <Field label="Hora" icon={Clock} value="10:00" w="flex-1 min-w-28" />
-            <button className="flex h-11 items-center gap-2 rounded-md bg-primary px-6 font-semibold text-primary-foreground"><ArrowRight className="h-5 w-5 text-accent" />Buscar vehículos</button>
+            <Link to="/vehiculos" className="flex h-11 items-center gap-2 rounded-md bg-primary px-6 font-semibold text-primary-foreground"><ArrowRight className="h-5 w-5 text-accent" />Buscar vehículos</Link>
           </div>
         </div>
       </div>
@@ -106,26 +66,15 @@ function Index() {
         <div className="mt-3 h-1 w-16 bg-accent" />
         <div className="mt-6 grid gap-5 md:grid-cols-3">
           {[["General Roca", roca], ["Neuquén", neuquen], ["Bariloche", bariloche]].map(([n, img]) => (
-            <a key={n} href="#" className="group relative h-48 overflow-hidden rounded-xl">
+            <Link key={n} to="/destinos" className="group relative h-48 overflow-hidden rounded-xl">
               <img src={img} alt={n} loading="lazy" width={1088} height={608} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
               <span className="absolute bottom-4 left-5 font-display text-3xl font-bold text-primary-foreground">{n}</span>
               <ArrowRight className="absolute bottom-5 right-5 h-7 w-7 text-accent" />
-            </a>
+            </Link>
           ))}
         </div>
       </section>
-
-      <footer className="bg-navy text-primary-foreground">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-6 py-8 text-sm">
-          <Logo light />
-          <div className="flex gap-2"><MapPin className="h-4 w-4" /><div>General Roca, Río Negro<br />Alto Valle, Patagonia</div></div>
-          <div className="space-y-1"><div className="flex gap-2"><Phone className="h-4 w-4" />+54 298 456-7890</div><div className="flex gap-2"><MessageCircle className="h-4 w-4" />+54 9 298 456-7890</div></div>
-          <div className="flex gap-2"><Mail className="h-4 w-4" />reservas@delvallerentacar.com.ar</div>
-          <nav className="flex gap-5">{nav.map((n) => <a key={n} href="#">{n}</a>)}</nav>
-          <div className="flex gap-3"><Instagram /><Facebook /></div>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }
