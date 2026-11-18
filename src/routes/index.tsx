@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ArrowRight, CalendarDays, Car, Clock, Facebook, Instagram, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
-import hero from "@/assets/hero.jpg";
+import hero from "@/assets/renault-rumbo-a-los-andes.png.asset.json";
 import roca from "@/assets/roca.jpg";
 import neuquen from "@/assets/neuquen.jpg";
 import bariloche from "@/assets/bariloche.jpg";
@@ -77,7 +77,7 @@ function Index() {
       )}
 
       <section className="relative">
-        <img src={hero} alt="Auto en ruta patagónica" width={1920} height={832} className="h-[480px] w-full object-cover" />
+        <img src={hero.url} alt="Renault azul rumbo a los Andes" width={1774} height={887} className="h-[480px] w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/40 to-transparent" />
         <div className="absolute inset-0 mx-auto max-w-7xl px-6 pt-14 text-primary-foreground">
           <p className="text-sm tracking-[0.25em]">GENERAL ROCA · ALTO VALLE · PATAGONIA</p>
