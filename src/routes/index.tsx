@@ -4,7 +4,6 @@ import { ArrowRight, CalendarDays, Car, Clock, MapPin } from "lucide-react";
 import hero from "@/assets/renault-rumbo-a-los-andes.png.asset.json";
 import roca from "@/assets/roca.jpg";
 import neuquen from "@/assets/neuquen.jpg";
-import bariloche from "@/assets/bariloche.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -64,8 +63,8 @@ function Index() {
       <section className="mx-auto max-w-7xl px-6 py-12">
         <h2 className="text-3xl font-bold text-primary">Destinos populares</h2>
         <div className="mt-3 h-1 w-16 bg-accent" />
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          {[["General Roca", roca], ["Neuquén", neuquen], ["Bariloche", bariloche]].map(([n, img]) => (
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {[["General Roca", roca], ["Neuquén", neuquen]].map(([n, img]) => (
             <Link key={n} to="/destinos" className="group relative h-48 overflow-hidden rounded-xl">
               <img src={img} alt={n} loading="lazy" width={1088} height={608} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
