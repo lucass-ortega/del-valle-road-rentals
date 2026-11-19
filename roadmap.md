@@ -11,3 +11,8 @@
 - [x] Relevar el diseño de la imagen de referencia y preparar fotos de los seis modelos.
 - [x] Agregar las cards detalladas debajo de las categorías, con tarifa a consultar y enlace de contacto.
 - [x] Verificar contenido, enlaces, compilación y presentación en escritorio y móvil.
+
+## Flota real
+- [x] Reemplazar la lista por los 5 vehículos reales con su año y foto.
+- [x] Ajustar las tarjetas de categorías a la flota (Económico, Sedán, Hatchback, SUV Compacto).
+- [x] Verificar fotos, año, enlaces y presentación en escritorio y móvil.

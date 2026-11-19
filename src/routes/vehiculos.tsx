@@ -2,9 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Briefcase,
+  Calendar,
   Car,
   CarFront,
   Check,
+  Gauge,
   MapPin,
   MessageCircle,
   Settings2,
@@ -14,11 +16,10 @@ import {
 } from "lucide-react";
 
 import chevroletOnix from "@/assets/chevrolet-onix-plus.webp.asset.json";
-import mercedesCla from "@/assets/mercedes-cla-200.webp.asset.json";
-import mercedesGlc from "@/assets/mercedes-glc-200.webp.asset.json";
-import mercedesSprinter from "@/assets/mercedes-sprinter-motorhome.webp.asset.json";
-import nissanFrontier from "@/assets/nissan-frontier-4x4.webp.asset.json";
-import renaultFluence from "@/assets/renault-fluence.webp.asset.json";
+import renaultKardian from "@/assets/renault-kardian.webp.asset.json";
+import renaultLogan from "@/assets/renault-logan.webp.asset.json";
+import renaultSandero from "@/assets/renault-sandero.webp.asset.json";
+import vwPoloTrack from "@/assets/vw-polo-track.webp.asset.json";
 import { PageHero } from "@/components/site/page-hero";
 import { ReservationCta } from "@/components/site/reservation-cta";
 
@@ -47,7 +48,7 @@ export const Route = createFileRoute("/vehiculos")({
 const categories = [
   {
     name: "Económico",
-    icon: Car,
+    icon: Gauge,
     description: "Una opción ágil y práctica para moverte por la ciudad y descubrir el Alto Valle.",
     features: ["Ideal para ciudad", "Uso eficiente", "Equipaje liviano"],
   },
@@ -58,73 +59,69 @@ const categories = [
     features: ["Confort en ruta", "Amplio baúl", "Viajes en familia"],
   },
   {
-    name: "SUV",
-    icon: CarFront,
-    description: "Mayor amplitud y una posición de manejo elevada para tus escapadas patagónicas.",
-    features: ["Interior espacioso", "Ideal para viajes", "Más capacidad de equipaje"],
+    name: "Hatchback",
+    icon: Car,
+    description: "Practicidad y fácil maniobra para el día a día y los viajes cortos.",
+    features: ["Fácil de estacionar", "Buen aprovechamiento", "Ideal para parejas"],
   },
   {
-    name: "Camioneta",
+    name: "SUV Compacto",
     icon: Truck,
-    description: "Robustez y versatilidad para quienes necesitan espacio y capacidad de carga.",
-    features: ["Gran capacidad", "Uso versátil", "Consulta según recorrido"],
+    description: "Mayor altura y una posición de manejo elevada para tus escapadas patagónicas.",
+    features: ["Posición elevada", "Ideal para viajes", "Más capacidad de equipaje"],
   },
 ];
 
 const fleet = [
   {
-    name: "Chevrolet Onix Plus",
-    category: "Económico",
-    detail: "Compacto · 5 puertas",
+    name: "Renault Kardian Evolution 1.6 MT",
+    category: "SUV Compacto",
+    detail: "SUV · 5 puertas",
+    year: 2026,
+    image: renaultKardian,
+    passengers: 5,
+    luggage: 2,
+    transmission: "Manual",
+  },
+  {
+    name: "Renault Logan Life 1.6",
+    category: "Sedán",
+    detail: "Sedán · 4 puertas",
+    year: 2024,
+    image: renaultLogan,
+    passengers: 5,
+    luggage: 3,
+    transmission: "Manual",
+  },
+  {
+    name: "Chevrolet Onix Plus 1.0T LT MT",
+    category: "Sedán",
+    detail: "Sedán · 4 puertas",
+    year: 2025,
     image: chevroletOnix,
     passengers: 5,
     luggage: 2,
     transmission: "Manual",
   },
   {
-    name: "Renault Fluence",
-    category: "Sedán",
-    detail: "Sedán · 4 puertas",
-    image: renaultFluence,
-    passengers: 5,
-    luggage: 3,
-    transmission: "Manual",
-  },
-  {
-    name: "Mercedes Benz CLA 200",
-    category: "Premium",
-    detail: "Sedán · 4 puertas",
-    image: mercedesCla,
+    name: "Volkswagen Polo Track MSI MT G1",
+    category: "Hatchback",
+    detail: "Hatchback · 5 puertas",
+    year: 2026,
+    image: vwPoloTrack,
     passengers: 5,
     luggage: 2,
-    transmission: "Automático",
-  },
-  {
-    name: "Mercedes Benz Sprinter Motorhome",
-    category: "Motorhome",
-    detail: "Casa rodante · 4 personas",
-    image: mercedesSprinter,
-    passengers: 4,
-    luggage: 4,
     transmission: "Manual",
   },
   {
-    name: "Nissan Frontier 4x4",
-    category: "Camioneta 4x4",
-    detail: "Doble cabina · 4x4",
-    image: nissanFrontier,
+    name: "Renault Sandero Life 1.6",
+    category: "Hatchback",
+    detail: "Hatchback · 5 puertas",
+    year: 2025,
+    image: renaultSandero,
     passengers: 5,
-    luggage: 4,
-    transmission: "Automático",
-  },
-  {
-    name: "Mercedes Benz GLC 200",
-    category: "SUV Premium",
-    detail: "SUV · 5 puertas",
-    image: mercedesGlc,
-    passengers: 5,
-    luggage: 3,
-    transmission: "Automático",
+    luggage: 2,
+    transmission: "Manual",
   },
 ];
 
@@ -179,7 +176,7 @@ function VehiclesPage() {
         </div>
 
         <div className="space-y-5">
-          {fleet.map(({ name, category, detail, image, passengers, luggage, transmission }) => (
+          {fleet.map(({ name, category, detail, year, image, passengers, luggage, transmission }) => (
             <article
               key={name}
               className="grid overflow-hidden rounded-xl border border-border bg-card shadow-sm lg:grid-cols-[250px_minmax(0,1fr)_190px]"
@@ -214,6 +211,10 @@ function VehiclesPage() {
                   <span className="flex items-center gap-1.5">
                     <Settings2 className="h-4 w-4 text-primary" />
                     {transmission}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="h-4 w-4 text-primary" />
+                    Año {year}
                   </span>
                   <span className="flex items-center gap-1.5">
                     <Snowflake className="h-4 w-4 text-primary" />
